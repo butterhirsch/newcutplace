@@ -356,7 +356,7 @@ class Range(object):
             else:
                 result += "%s...%s" % (lower, upper)
         else:
-            result = str(None)
+            result = six.text_type(None)
         return result
 
     def __repr__(self):
@@ -379,7 +379,7 @@ class Range(object):
                     result += ", "
                 result += self._repr_item(item)
         else:
-            result = str(None)
+            result = six.text_type(None)
         return result
 
     def _items_overlap(self, some, other):

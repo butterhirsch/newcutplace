@@ -366,7 +366,11 @@ class IntegerFieldFormat(AbstractFieldFormat):
         has_rule = (rule is not None) and (rule.strip() != '')
 
         if has_length:
-            length_range = ranges.create_range_from_length(self._length)
+            length = self._length
+            if data_format.format == data.FORMAT_FIXED and self._length.lower_limit == self._length.upper_limit:
+                length = ranges.Range('1...%d' % self._length.upper_limit)
+
+            length_range = ranges.create_range_from_length(length)
 
             if length_range.lower_limit == 1:
                 self._is_allowed_to_be_empty = False
